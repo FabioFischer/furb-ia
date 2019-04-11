@@ -7,8 +7,6 @@ IMG_WALL_TILE = 1
 IMG_CLEAN_TILE = 0
 IMG_DIRTY_TILE = 2
 IMG_AGENT_TILE = 3
-
-fig = plt.figure()
 frameRate = 3
 
 def buildMatriz(size):
@@ -26,16 +24,17 @@ def buildMatriz(size):
                 m[x][y] = IMG_DIRTY_TILE if ran == 1 else IMG_CLEAN_TILE
     return m
 
-matrix = buildMatriz(6)
-print(matrix)
-cmap = matplotlib.cm.Greys
-im = plt.imshow(matrix, cmap, animated=True)
-
 def updatefig(*args):
     global matrix
     matrix = buildMatriz(6)
     im.set_array(matrix)
     return im,
 
+matrix = buildMatriz(6)
+print(matrix)
+
+fig = plt.figure()
+cmap = matplotlib.cm.Pastel1
+im = plt.imshow(matrix, cmap, animated=True)
 ani = animation.FuncAnimation(fig, updatefig, interval=1000/frameRate, blit=True)
 plt.show()
