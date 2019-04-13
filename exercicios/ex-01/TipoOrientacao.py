@@ -1,8 +1,16 @@
 from enum import Enum
 
+"""
+    FURB - Bacharelado em Ciências da Computação
+    Inteligência Artificial
+    Atividade Avaliativa: APA
+
+    Adriner Maranho de Andrade, Fábio Luiz Fischer, Jordy Felipe da Silva
+"""
+
 
 class TipoOrientacao(Enum):
-    baixo = 0
+    abaixo = 0
     esquerda = 1
-    cima = 2
+    acima = 2
     direita = 4
