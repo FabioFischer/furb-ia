@@ -7,7 +7,7 @@ from Mapeador import Mapeador
     FURB - Bacharelado em Ciências da Computação
     Inteligência Artificial
     Atividade Avaliativa: APA
-    Exercício 01
+    Exercício 02
 
     Adriner Maranho de Andrade, Fábio Luiz Fischer, Jordy Felipe da Silva
 """
