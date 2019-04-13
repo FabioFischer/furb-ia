@@ -93,19 +93,18 @@ def animacao(*args):
 
 intervalo_frames = 500
 frame_rate = 60
-tamanho_mapa = 6    # tamanho da parede = 1 + 1
+# o tamanho do mapa considera o tamanho da parede
+tamanho_mapa = 6
 
 # Inicialização dos objetos da aplicação
 mapa = mapa_aleatorio(tamanho_mapa)
 agente = Agente(1, 1)
 
 # Inicialização e configuração da animação
-fig = plt.figure()
+fig = plt.figure("Atividade Avaliativa: APA - Exercício 01")
 cmap = matplotlib.cm.Pastel2
 im = plt.imshow(mapa_exibicao(mapa, agente), cmap, animated=True)
 # https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html
 ani = animation.FuncAnimation(fig, animacao, init_func=inicia_animacao, frames=frame_rate, interval=intervalo_frames, blit=True)
-plt.title("Atividade Avaliativa: APA - Exercício 01")
 plt.show()
 plt.pause(0.5)
-plt.clf()

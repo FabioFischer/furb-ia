@@ -25,15 +25,18 @@ class Mapeador:
         # Percorre o mapa de cima para baixo alternando a orientação horizontal
         for i in range(len(self.mapa) - 3):
             for j in range(len(self.mapa[i]) - 3):
+                print(orientacao_horizontal)
                 fila.put(orientacao_horizontal)
             fila.put(TipoOrientacao.abaixo)
+            print(TipoOrientacao.abaixo)
             orientacao_horizontal = TipoOrientacao.esquerda \
                 if orientacao_horizontal == TipoOrientacao.direita else TipoOrientacao.direita
-
         # Retorna o agente à posição inicial horizontalmente
-        if orientacao_horizontal == TipoOrientacao.esquerda:
+        if orientacao_horizontal == TipoOrientacao.direita:
             for i in range(len(self.mapa[0]) - 3):
-                fila.put(TipoOrientacao.esquerda)
+                fila.put(TipoOrientacao.direita)
+        for i in range(len(self.mapa[0]) - 3):
+            fila.put(TipoOrientacao.esquerda)
         # Retorna o agente a posição inicial verticalmente
         for i in range(len(self.mapa) - 3):
             fila.put(TipoOrientacao.acima)
