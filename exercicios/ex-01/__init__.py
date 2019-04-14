@@ -39,6 +39,7 @@ from TipoAcao import TipoAcao
         "aspirar", caso contrário, a fila do mapeamento será consumida.
 """
 
+
 # constrói um mapa com paredes e regiões aleatórias
 def mapa_aleatorio(tamanho):
     mapa = [[0 for x in range(tamanho)] for y in range(tamanho)]

@@ -5,7 +5,6 @@ from copy import deepcopy
 from random import randint
 from Agente import Agente
 from TipoRegiao import TipoRegiao
-from TipoAcao import TipoAcao
 
 """
     FURB - Bacharelado em Ciências da Computação
@@ -37,6 +36,7 @@ from TipoAcao import TipoAcao
     Resposta:
 """
 
+
 # constrói um mapa com paredes e regiões aleatórias
 def mapa_aleatorio(tamanho):
     mapa = [[0 for x in range(tamanho)] for y in range(tamanho)]
@@ -59,34 +59,30 @@ def mapa_exibicao(mapa, agente):
     return ref
 
 
-# Gerencia a posição do agente em relação ao mundo e determina a próxima ação
-def agente_reativo_simples(percepcao, agente):
-    print("Percepção", percepcao[agente.x][agente.y])
-    # Se a região em que o agente esta posicionado está suja, a ação deve ser aspirar,
-    # caso contrario deve seguir a rota do mapeamento
-    if percepcao[agente.x][agente.y] == TipoRegiao.sujo.value:
-        return TipoAcao.aspirar
-    # Quando o agente estiver na posição inicial,
-    # a fila de mapeamento deve ser preenchida com a rota que o agente deve percorrer
-    if agente.x == 1 and agente.y == 1:
-        agente.inicializa_mapeamento(mapa)
-    return agente.define_acao_mapeamento()
-
-
 # Função chamada na inicialização da animação
 def inicia_animacao():
     im.set_array(mapa_exibicao(mapa, agente))
     return im,
 
 
+def check_obj(mapa):
+    for i in range(len(mapa)):
+        for j in range(len(mapa[i])):
+            if mapa[i][j] == TipoRegiao.sujo.value:
+                return 1
+    return 0
+
+
 # Função chamada a cada frame da animação
 def animacao(*args):
-    global mapa, agente
-    # Determina a próxima ação do agente com base em sua posição atual
-    acao = agente_reativo_simples(mapa, agente)
-    print("Ação", acao.name)
-    # Agente executa a ação
-    agente.executa_acao(mapa, acao)
+    global mapa, agente, contador
+    if check_obj(mapa) == 1:
+        contador += 1
+        print("Contador", contador)
+        if agente.objetivo is None:
+            agente.busca_objetivo(mapa)
+        if agente.objetivo is not None:
+            agente.executa_acao(mapa, agente.executa_objetivo(mapa))
     im.set_array(mapa_exibicao(mapa, agente))
     return im,
 
@@ -94,13 +90,14 @@ intervalo_frames = 500
 frame_rate = 60
 # o tamanho do mapa considera o tamanho da parede
 tamanho_mapa = 6
+contador = 0
 
 # Inicialização dos objetos da aplicação
 mapa = mapa_aleatorio(tamanho_mapa)
 agente = Agente(1, 1)
 
 # Inicialização e configuração da animação
-fig = plt.figure("Atividade Avaliativa: APA - Exercício 01")
+fig = plt.figure("Atividade Avaliativa: APA - Exercício 02")
 cmap = matplotlib.cm.Pastel2
 im = plt.imshow(mapa_exibicao(mapa, agente), cmap, animated=True)
 # https://matplotlib.org/api/_as_gen/matplotlib.animation.FuncAnimation.html
