@@ -1,4 +1,3 @@
-
 from TipoAcao import TipoAcao
 from TipoRegiao import TipoRegiao
 from Mapeador import Mapeador
@@ -40,3 +39,4 @@ class Agente:
                 self.y += 1
         elif acao == TipoAcao.aspirar:
             mapa[self.x][self.y] = TipoRegiao.limpo.value
+		

@@ -10,10 +10,6 @@ from enum import Enum
 """
 
 
-class TipoAcao(Enum):
-    acima = 0
-    abaixo = 1
-    esquerda = 2
-    direita = 3
-    aspirar = 4
-    noop = 5
+class TipoObjetivo(Enum):
+    limpo = 0
+    sujo = 1
