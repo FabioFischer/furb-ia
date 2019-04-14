@@ -27,6 +27,7 @@ from TipoRegiao import TipoRegiao
     há sujeira na sala (retorna 1 se tem sujeira, caso contrário retorna 0).
     • Acrescente a ação "NoOp" na lista de ações do agente e ajuste a ação para "NoOp" uma vez
     que a sala estiver limpa.
+
     A função de agente deve ser chamado agenteObjetivo(percepcao, objObtido) e deve retornar uma
     das 6 ações possíveis (5 inicialmente definidas + "NoOp"). O parâmetro objObtido é a saída da
     função checkObj(sala).
@@ -76,13 +77,8 @@ def check_obj(mapa):
 # Função chamada a cada frame da animação
 def animacao(*args):
     global mapa, agente, contador
-    if check_obj(mapa) == 1:
-        contador += 1
-        print("Contador", contador)
-        if agente.objetivo is None:
-            agente.busca_objetivo(mapa)
-        if agente.objetivo is not None:
-            agente.executa_acao(mapa, agente.executa_objetivo(mapa))
+    acao = agente.agente_objetivo(mapa, check_obj(mapa))
+    agente.executa_acao(mapa, acao)
     im.set_array(mapa_exibicao(mapa, agente))
     return im,
 
@@ -90,7 +86,6 @@ intervalo_frames = 500
 frame_rate = 60
 # o tamanho do mapa considera o tamanho da parede
 tamanho_mapa = 6
-contador = 0
 
 # Inicialização dos objetos da aplicação
 mapa = mapa_aleatorio(tamanho_mapa)

@@ -20,6 +20,15 @@ class Agente:
         self.y = y
         self.mapeador = Mapeador(self)
         self.objetivo = None
+        self.contador = 0
+
+    def agente_objetivo(self, mapa, obj_obtido):
+        if obj_obtido == 1:
+            if self.objetivo is None:
+                self.busca_objetivo(mapa)
+            if self.objetivo is not None:
+                return self.executa_objetivo(mapa)
+        return TipoAcao.NoOp
 
     def busca_objetivo(self, mapa):
         self.objetivo = self.mapeador.busca_objetivo(mapa)
@@ -28,6 +37,8 @@ class Agente:
         if mapa[self.x][self.y] == TipoRegiao.sujo.value:
             return TipoAcao.aspirar
         orientacao = self.objetivo.rota.get()
+        self.contador += 1
+        print("Contador", self.contador)
         if orientacao == TipoOrientacao.direita:
             return TipoAcao.direita
         elif orientacao == TipoOrientacao.esquerda:

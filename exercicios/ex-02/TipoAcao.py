@@ -16,3 +16,4 @@ class TipoAcao(Enum):
     esquerda = 2
     direita = 3
     aspirar = 4
+    NoOp = 5
