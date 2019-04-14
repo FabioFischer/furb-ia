@@ -18,12 +18,12 @@ class Objetivo:
         self.custo = abs(agente.x - self.x) + abs(agente.y - self.y)
         self.rota = self.define_rota(agente)
 
+    # Define a rota para que o agente alcance o objetivo de acordo a diferença horizontal e vertical entre ambos
+    # Não considera obstaculos
     def define_rota(self, agente):
         rota = Queue()
-        vertical = agente.x - self.x
-        horizontal = agente.y - self.y
-        for i in range(abs(vertical)):
-            rota.put(TipoOrientacao.acima if vertical > 0 else TipoOrientacao.abaixo)
-        for i in range(abs(horizontal)):
-            rota.put(TipoOrientacao.esquerda if horizontal > 0 else TipoOrientacao.direita)
+        for i in range(abs(agente.x - self.x)):
+            rota.put(TipoOrientacao.acima if agente.x - self.x > 0 else TipoOrientacao.abaixo)
+        for i in range(abs(agente.y - self.y)):
+            rota.put(TipoOrientacao.esquerda if agente.y - self.y > 0 else TipoOrientacao.direita)
         return rota

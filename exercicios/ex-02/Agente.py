@@ -18,21 +18,30 @@ class Agente:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.mapeador = Mapeador(self)
         self.objetivo = None
         self.contador = 0
 
+    # Função responsável por retornar a próxima ação do agente de acordo com a situação atual do mapa
+    # obj_obtido será 1 quando houver objetivos disponíveis no mapa
     def agente_objetivo(self, mapa, obj_obtido):
         if obj_obtido == 1:
+            # Sempre que uma região é limpa, o objetivo atual do agente deixa de existir.
             if self.objetivo is None:
+                # Busca um objetivo
                 self.busca_objetivo(mapa)
             if self.objetivo is not None:
+                # Se o objetivo foi encontrado, executa a fila de ações necessárias para alcançar a região objetivo
                 return self.executa_objetivo(mapa)
         return TipoAcao.NoOp
 
+    # Busca o objetivo mais próximo do agente
+    # Os objetivos terão seu custo e sua rota calculada em sua inicialização
     def busca_objetivo(self, mapa):
-        self.objetivo = self.mapeador.busca_objetivo(mapa)
+        self.objetivo = Mapeador.busca_objetivo(self, mapa)
 
+    # Consome a fila de alções necessárias para alcançar o objetivo
+    # Caso a região atual do agente esteja suja, a ação aspirar será retornada
+    # Um contador será incrementado sempre que o agente se deslocar
     def executa_objetivo(self, mapa):
         if mapa[self.x][self.y] == TipoRegiao.sujo.value:
             return TipoAcao.aspirar
@@ -48,7 +57,9 @@ class Agente:
         elif orientacao == TipoOrientacao.abaixo:
             return TipoAcao.abaixo
 
-    def executa_acao(self, mapa, acao):
+    # Executa a ação de entrada da função
+    # Caso a ação seja aspirar, o objetivo atual do agente deixa de existir
+    def executa_acao(self, acao, mapa):
         if acao == TipoAcao.acima:
             if self.x > 1:
                 self.x -= 1

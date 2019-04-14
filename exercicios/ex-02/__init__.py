@@ -34,7 +34,10 @@ from TipoRegiao import TipoRegiao
 
     Responda: É possível ter todo o espaço limpo efetivamente? Justifique sua resposta.
 
-    Resposta:
+    Resposta: Sim, desde que o mapa não possua obstáculos e que a altura do mapa seja igual ao comprimento. Como a
+        função checkObj será executada até a interrupção do programa, quando houver uma sujeira na sala, o agente irá
+        construir a rota de sua posição atual até a região suja e irá realizar a limpeza. Quando toda a sala estiver
+        limpa, o agente não realizará nenhuma ação.
 """
 
 
@@ -66,6 +69,7 @@ def inicia_animacao():
     return im,
 
 
+# Verifica se existem regiões sujas no mapa, retorna 1 se existe, 0 se não
 def check_obj(mapa):
     for i in range(len(mapa)):
         for j in range(len(mapa[i])):
@@ -77,12 +81,13 @@ def check_obj(mapa):
 # Função chamada a cada frame da animação
 def animacao(*args):
     global mapa, agente, contador
-    acao = agente.agente_objetivo(mapa, check_obj(mapa))
-    agente.executa_acao(mapa, acao)
+    # Agente busca o objetivo mais próximo e monta uma fila de ações para chegar no objetivo
+    # Caso não haja mais objetivos, a ação NoOp será retornada
+    agente.executa_acao(agente.agente_objetivo(mapa, check_obj(mapa)), mapa)
     im.set_array(mapa_exibicao(mapa, agente))
     return im,
 
-intervalo_frames = 500
+intervalo_frames = 300
 frame_rate = 60
 # o tamanho do mapa considera o tamanho da parede
 tamanho_mapa = 6

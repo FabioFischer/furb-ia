@@ -13,13 +13,13 @@ from TipoRegiao import TipoRegiao
 
 
 class Mapeador:
-    def __init__(self, agente):
-        self.agente = agente
-
-    def busca_objetivo(self, mapa):
+    # Busca o objetivo mais próximo do agente
+    # Os objetivos terão seu custo e sua rota calculada em sua inicialização
+    @staticmethod
+    def busca_objetivo(agente, mapa):
         objetivos = []
         for i in range(len(mapa)):
             for j in range(len(mapa[i])):
                 if mapa[i][j] == TipoRegiao.sujo.value:
-                    objetivos.append(Objetivo(self.agente, i, j))
+                    objetivos.append(Objetivo(agente, i, j))
         return min(objetivos, key=attrgetter('custo')) if len(objetivos) > 0 else None
