@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ex-01.iml" filepath="$PROJECT_DIR$/.idea/ex-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ex-02/.idea/ex-02.iml" filepath="$PROJECT_DIR$/../ex-02/.idea/ex-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../furb-processamento-imagens/exemplos/keypoints/.idea/keypoints.iml" filepath="$PROJECT_DIR$/../../../furb-processamento-imagens/exemplos/keypoints/.idea/keypoints.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../trabalhos/trab-02-algoritmos-genericos/.idea/trab-02-algoritmos-genericos.iml" filepath="$PROJECT_DIR$/../../trabalhos/trab-02-algoritmos-genericos/.idea/trab-02-algoritmos-genericos.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../furb-processamento-imagens/trabalhos/trab-03/.idea/trab-03.iml" filepath="$PROJECT_DIR$/../../../furb-processamento-imagens/trabalhos/trab-03/.idea/trab-03.iml" />
     </modules>

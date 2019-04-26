@@ -3,16 +3,14 @@ from Cromossomo import Cromossomo
 class Individuo():
     def __init__(self, cenario, estado_inicial, estado_objetivo, pai_01=None, pai_02=None):
         self.cromossomo = Cromossomo(cenario, estado_inicial, estado_objetivo, pai_01, pai_02)
+        self.aptidao = self.determina_aptidao(cenario)
 
-"""
-    def distancia(cidade_01, cidade_02):
-        return math.sqrt((cidade_01.x - cidade_02.x) ** 2 + (cidade_01.y - cidade_02.y) ** 2)
+    def determina_aptidao(self, cenario):
+        if self.cromossomo is not None and self.cromossomo.genes is not None:
+            return self.soma_custo(cenario, 1)
+        return 0
 
-    def constroi_distancias(cidades):
-        return [[distancia(cidades[i], cidades[j]) for j in range(len(cidades))] for i in range(len(cidades))]
-
-    def funcao_aptidao(self):
-        identidade
-
-        return
-"""
+    def soma_custo(self, cenario, i):
+        if i < len(self.cromossomo.genes):
+            return cenario.matriz_identidade[self.cromossomo.genes[i-1].id][self.cromossomo.genes[i].id] + self.soma_custo(cenario, i+1)
+        return 0
