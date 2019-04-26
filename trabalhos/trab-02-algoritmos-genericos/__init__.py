@@ -1,22 +1,14 @@
 
-import random
-import math
-from Cidade import Cidade
+from Cenario import Cenario
+from Individuo import Individuo
 
 
-def constroi_cidades(quantidade):
-    return [Cidade(random.random(), random.random()) for i in range(quantidade)]
+cenario = Cenario(20)
+estado_inicial = cenario.cidades[0]
+estado_objetivo = cenario.cidades[0]
+# População inicial de 20 individuos
+populacao = [Individuo(cenario, estado_inicial, estado_objetivo) for i in range(20)]
 
-def distancia(cidade_01, cidade_02):
-    return math.sqrt((cidade_01.x - cidade_02.x) ** 2 + (cidade_01.y - cidade_02.y) ** 2)
-
-def constroi_distancias(cidades):
-    return [[distancia(cidades[i], cidades[j]) for j in range(len(cidades))] for i in range(len(cidades))]
-
-cidades = constroi_cidades(20)
-
-distancias = constroi_distancias(cidades)
-
-print(cidades)
-print("")
-print(distancias)
+for i in range(10001):
+    # Seleção de individuos existentes e criação de novos elementos
+    a = 0
