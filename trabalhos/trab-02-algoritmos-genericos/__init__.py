@@ -3,41 +3,43 @@ from Cenario import Cenario
 from Individuo import Individuo
 
 qtd_cidades = 20
-iteracoes = 5
+qtd_individuos = 20
+iteracoes = 1
+prob_mutacao = 0.05
 
 cenario = Cenario(qtd_cidades)
 estado_inicial = cenario.cidades[0]
 estado_objetivo = cenario.cidades[0]
 # População inicial de 20 individuos
-populacao = [Individuo(cenario, estado_inicial, estado_objetivo) for i in range(qtd_cidades)]
+populacao = [Individuo(cenario, estado_inicial, estado_objetivo, prob_mutacao) for i in range(qtd_individuos)]
 print(populacao)
 
-def define_prioridade(populacao):
-    pop_ordenada = sorted(populacao, key=lambda individuo: individuo.aptidao)
-    metade_pop = pop_ordenada[0:round(qtd_cidades/2)]
-    metade_pop_inversa = metade_pop[::-1]
 
-    prioridade_pop = [(None, 0) for i in range(len(metade_pop_inversa))]
+def realiza_selecao():
+    global populacao
+    prob_pop = [(populacao[i], i+1) for i in range(len(populacao))][::-1]
+    pais = [(None, None) for i in range(round(len(prob_pop)/2))]
+    for i in range(round(len(prob_pop)/2)):
+        pai1 = define_pais(prob_pop)
+        pais[i] = (pai1, define_pais(prob_pop, pai1))
+    return pais
 
-    for i in range(len(metade_pop_inversa)):
-        prioridade_pop[i] = (metade_pop_inversa[i], i+1)
 
-    p1 = define_pai(prioridade_pop[::-1])
-    print(p1)
-    p2 = define_pai(prioridade_pop[::-1], p1)
-    print(p2)
-    print(prioridade_pop)
-
-def define_pai(prioridade_pop, pai_01 = None):
-    if pai_01 is not None:
-        prioridade_pop = [i for i in prioridade_pop if i[0] != pai_01[0]]
-    index = randint(1, sum(int(i[1]) for i in prioridade_pop))
-    for prioridade_ind in prioridade_pop:
+def define_pais(prob_pop, pai1=None):
+    if pai1 is not None:
+        prob_pop = [i for i in prob_pop if i[0] != pai1]
+    index = randint(1, sum(int(i[1]) for i in prob_pop))
+    for prioridade_ind in prob_pop:
         if index - prioridade_ind[1] <= 0:
-            return prioridade_ind
+            return prioridade_ind[0]
         index -= prioridade_ind[1]
-    return prioridade_pop[len(prioridade_pop)-1]
+    return prob_pop[len(prob_pop) - 1][0]
 
-for i in range(iteracoes+1):
-    pais = define_prioridade(populacao)
-    # Seleção de individuos existentes e criação de novos elementos
+
+for i in range(iteracoes):
+    # Seleciona a metade da população com maior aptidao
+    populacao = sorted(populacao, key=lambda individuo: individuo.aptidao)[::-1][0:round(qtd_cidades/2)]
+    for pais in realiza_selecao():
+        # Cada casal gera um par de individuos
+        f1, f2 = pais[0].reproduzir(pais[1], cenario, estado_inicial, estado_objetivo, prob_mutacao)
+        #populacao.append(f1, f2)

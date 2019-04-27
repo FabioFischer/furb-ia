@@ -1,8 +1,6 @@
 
-from Gene import Gene
 
-
-class Cidade(Gene):
+class Cidade:
     id = 0
 
     def __init__(self, x, y):
@@ -13,10 +11,10 @@ class Cidade(Gene):
         Cidade.id += 1
 
     def __repr__(self):
-        return "(id:%s - x:%s, y:%s)" % (self.id, self.x, self.y)
+        return "(id:%s)" % self.id
 
     def __str__(self):
-        return "(id:%s - x:%s, y:%s)" % (self.id, self.x, self.y)
+        return "(id:%s)" % self.id
 
     def __eq__(self, other):
         return self.id == other
