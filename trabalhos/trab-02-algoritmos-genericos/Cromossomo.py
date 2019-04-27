@@ -1,6 +1,5 @@
 from random import randint
 from copy import deepcopy
-import collections
 
 
 class Cromossomo:
@@ -22,49 +21,44 @@ class Cromossomo:
         return caminho
 
     def reproduzir(self, other):
-        return self.conflitos_geneticos(self.recombinacao(deepcopy(self.genes), deepcopy(other.genes), randint(1, len(self.genes)-1)))
+        index = randint(1, len(self.genes)-1)
+        return self.conflitos_geneticos(self.recombinacao(deepcopy(self.genes), deepcopy(other.genes), index), [index])
 
     def recombinacao(self, g1, g2, index):
-        print(g1, " ---- ",  g2)
-        print(index)
         aux = g1[index]
         g1[index] = g2[index]
         g2[index] = aux
         return g1, g2
 
-    def conflitos_geneticos(self, genes):
+    def conflitos_geneticos(self, genes, historico):
         g1, g2 = genes
-
-        print(g1, " ---- ",  g2)
-
-        s1 = self.genes_duplicados(g1[0:len(g1)-1])
-        s2 = self.genes_duplicados(g2[0:len(g1)-1])
-
-        print(s1, " ---- ",  s2)
-
-        if len(s1) == 0 and len(s2) == 0:
+        d1 = self.index_duplicado(g1[0:len(g1)-1], historico)
+        d2 = self.index_duplicado(g2[0:len(g1)-1], historico)
+        if d1 is None and d2 is None:
             return g1, g2
+        if d1 is not None:
+            historico.append(d1)
+            return self.conflitos_geneticos(self.recombinacao(g1, g2, d1), historico)
+        historico.append(d2)
+        return self.conflitos_geneticos(self.recombinacao(g1, g2, d2), historico)
 
-        if len(s1) > 0:
-            return self.conflitos_geneticos(self.recombinacao(g1, g2, g1.index(s1[0])))
-        return self.conflitos_geneticos(self.recombinacao(g1, g2, g2.index(s2[0])))
-
-    def genes_duplicados(self, genes):
+    def index_duplicado(self, genes, historico):
         visitados = {}
-        duplicados = []
-        for x in genes:
-            if x.id not in visitados:
-                visitados[x.id] = 1
+        for i in range(len(genes)):
+            if genes[i].id not in visitados:
+                visitados[genes[i].id] = 1
             else:
-                if visitados[x.id] == 1:
-                    duplicados.append(x)
-                visitados[x.id] += 1
-        return duplicados
+                if visitados[genes[i].id] == 1 and i not in historico:
+                    return i
+                visitados[genes[i].id] += 1
+        return None
 
     def verifica_mutacao(self, prob_mutacao):
         if randint(0, 10000) <= prob_mutacao * 100:
-            print("Realiza mutação")
+            print("MUTAÇÂO!!", self.genes)
             i, j = randint(1, len(self.genes) - 1), randint(1, len(self.genes) - 1)
             aux = self.genes[i]
             self.genes[i] = self.genes[j]
             self.genes[j] = aux
+            print("RESULTADO DA MUTAÇÂO: ", self.genes)
+
