@@ -14,3 +14,9 @@ class Individuo():
         if i < len(self.cromossomo.genes):
             return cenario.matriz_identidade[self.cromossomo.genes[i-1].id][self.cromossomo.genes[i].id] + self.soma_custo(cenario, i+1)
         return 0
+
+    def __repr__(self):
+        return "(apt:%s)" % (self.aptidao)
+
+    def __str__(self):
+        return "(apt:%s)" % (self.aptidao)
