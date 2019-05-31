@@ -24,5 +24,8 @@ class Individuo():
 
     def reproduzir(self, pai2, cenario, estado_inicial, estado_objetivo, prob_mutacao):
         g1, g2 = self.cromossomo.reproduzir(pai2.cromossomo)
+        print(g1)
+        print(g2)
+        print('*******')
         return Individuo(cenario, estado_inicial, estado_objetivo, prob_mutacao, g1), \
                Individuo(cenario, estado_inicial, estado_objetivo, prob_mutacao, g2)

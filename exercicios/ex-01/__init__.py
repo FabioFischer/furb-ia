@@ -63,11 +63,11 @@ def mapa_exibicao(mapa, agente):
 
 
 # Gerencia a posição do agente em relação ao mundo e determina a próxima ação
-def agente_reativo_simples(percepcao, agente):
-    print("Percepção", percepcao[agente.x][agente.y])
+def agente_reativo_simples(mapa, agente):
+    print("Percepção", mapa[agente.x][agente.y])
     # Se a região em que o agente esta posicionado está suja, a ação deve ser aspirar,
     # caso contrario deve seguir a rota do mapeamento
-    if percepcao[agente.x][agente.y] == TipoRegiao.sujo.value:
+    if mapa[agente.x][agente.y] == TipoRegiao.sujo.value:
         return TipoAcao.aspirar
     # Quando o agente estiver na posição inicial,
     # a fila de mapeamento deve ser preenchida com a rota que o agente deve percorrer

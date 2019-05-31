@@ -8,6 +8,9 @@
     <orderEntry type="module" module-name="trab-02-algoritmos-genericos" />
     <orderEntry type="module" module-name="trab-03" />
     <orderEntry type="module" module-name="keypoints" />
+    <orderEntry type="module" module-name="redes_neurais" />
+    <orderEntry type="module" module-name="identificar-placas" />
+    <orderEntry type="module" module-name="trab-03-correlacao_regressao" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
