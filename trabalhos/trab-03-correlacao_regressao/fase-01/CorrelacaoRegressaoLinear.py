@@ -9,9 +9,9 @@ class CorrelacaoRegressaoLinear:
 
     def correlacao(self):
         # Σ(x−x̄)(y−ȳ)
-        aux = 0
+        dividend = 0
         for i in range(len(self.dataset.x)):
-            aux += (self.dataset.x[i] - self.dataset.med_x) * (self.dataset.y[i] - self.dataset.med_y)
+            dividend += (self.dataset.x[i] - self.dataset.med_x) * (self.dataset.y[i] - self.dataset.med_y)
         # Σ(arr−arr̄)²
         def soma_linear(dataset, mediana):
             sum = 0
@@ -19,7 +19,7 @@ class CorrelacaoRegressaoLinear:
                 sum += (elem - mediana) ** 2
             return sum
         # (Σ(x−x̄)(y−ȳ)) / √(Σ(x−x̄)² Σ(y−ȳ)²)
-        return aux / (math.sqrt(soma_linear(self.dataset.x, self.dataset.med_x) * soma_linear(self.dataset.y, self.dataset.med_y)))
+        return dividend / (math.sqrt(soma_linear(self.dataset.x, self.dataset.med_x) * soma_linear(self.dataset.y, self.dataset.med_y)))
 
     def regressao(self):
         # Σ(x−x̄)(y−ȳ)
@@ -27,11 +27,11 @@ class CorrelacaoRegressaoLinear:
         for i in range(len(self.dataset.x)):
             dividend += (self.dataset.x[i] - self.dataset.med_x) * (self.dataset.y[i] - self.dataset.med_y)
         # Σ(x−x̄)²
-        b1_div = 0
+        divisor = 0
         for elem in self.dataset.x:
-            b1_div += (elem - self.dataset.med_x) ** 2
+            divisor += (elem - self.dataset.med_x) ** 2
         # 𝛽1 = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)²
-        b1 = dividend / b1_div
+        b1 = dividend / divisor
         # 𝛽0 = 𝑦̄− β1x,
         return self.dataset.med_y - (b1 * self.dataset.med_x), b1
 
