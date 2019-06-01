@@ -2,6 +2,8 @@ import math
 import operator
 from functools import reduce
 import matplotlib.pyplot as plt
+import numpy as np
+
 
 """
     FURB - Bacharelado em Ciências da Computação
@@ -82,10 +84,12 @@ dss = [DataSet('Dataset 1', [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5], [8.04, 6.95,
        DataSet('Dataset 2', [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5], [9.14, 8.14, 8.47, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74]),
        DataSet('Dataset 3', [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 19], [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 5.56, 7.91, 6.89, 12.50])]
 
-fracao_plot = 0.2
+inicio_plot = 0
 limite_plot = 20
+qtd_pontos_plot = 50
 
 for ds in dss:
+    # Calcula a correlação e a regressão para o dataset
     crl = CorrelacaoRegressaoLinear(ds)
 
     fig = plt.figure(ds.id)
@@ -97,12 +101,12 @@ for ds in dss:
     print('b1: ', crl.b1)
 
     # Marca os pontos do dataset
-    plt.scatter(ds.x, ds.y, alpha=0.5)
+    plt.scatter(ds.x, ds.y)
 
     # Gera valores de 0 até limite_plot de acordo com a regressão linear
-    x_prev = [x * fracao_plot for x in range(round(limite_plot/fracao_plot))]
+    x_prev = np.linspace(inicio_plot, limite_plot, num=qtd_pontos_plot)
     y_prev = [crl.reta_regressao(x) for x in x_prev]
     # Merca os pontos da regressão linear
-    plt.scatter(x_prev, y_prev, alpha=0.5, facecolor='red')
+    plt.scatter(x_prev, y_prev, alpha=0.2, facecolor='red')
 
     plt.show()
