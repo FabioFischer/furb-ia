@@ -11,7 +11,7 @@ from mpl_toolkits.mplot3d import Axes3D
 """
     FURB - Bacharelado em Ciências da Computação
     Inteligência Artificial
-    Trabalho 03 - Fase 01 - Análise de Regressão e Correlação Linear
+    Trabalho 03 - Fase 02 - Análise de Regressão Linear Multipla
 
     Semelhante a fase anterior, você deve implementar a função regmultipla que calcula os parâmetros 𝛽 para os dados de entrada y e X. Faça um script chamado rmdemo que faz o seguinte:
         a) Faça o download dos dados do arquivo data.mat ou data.csv. A primeira coluna é o tamanho da casa, a segunda coluna é o número de quartos, e a terceira coluna é o preço da casa.
