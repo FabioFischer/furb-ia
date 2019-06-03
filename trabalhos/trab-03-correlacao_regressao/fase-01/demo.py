@@ -24,11 +24,16 @@ import numpy as np
     Resposta: TODO
 """
 
+
+def strnum(x):
+    return round(x, 2)
+
+
 class DataSet:
     def __init__(self, id, x, y):
         self.id = id
-        self.x = x
-        self.y = y
+        self.x = np.array(x)
+        self.y = np.array(y)
         self.med_x = self.mediana(self.x)
         self.med_y = self.mediana(self.y)
 
@@ -75,7 +80,7 @@ class CorrelacaoRegressaoLinear:
         return self.dataset.med_y - (b1 * self.dataset.med_x), b1
 
     def reta_regressao(self, x):
-        # 𝑦̂=𝛽0+𝛽1z
+        # 𝑦̂=𝛽0+𝛽1x
         return self.b0 + (self.b1 * x)
 
 
@@ -84,29 +89,16 @@ dss = [DataSet('Dataset 1', [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5], [8.04, 6.95,
        DataSet('Dataset 2', [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5], [9.14, 8.14, 8.47, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74]),
        DataSet('Dataset 3', [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 19], [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 5.56, 7.91, 6.89, 12.50])]
 
-inicio_plot = 0
-limite_plot = 20
-qtd_pontos_plot = 50
-
 for ds in dss:
     # Calcula a correlação e a regressão para o dataset
     crl = CorrelacaoRegressaoLinear(ds)
 
     fig = plt.figure(ds.id)
-    plt.title("r: %s, β0: %s, β1: %s)" % (crl.r, crl.b0, crl.b1))
+    plt.title("r: %s    β0: %s    β1: %s" % (strnum(crl.r), strnum(crl.b0), strnum(crl.b1)))
     plt.grid(True)
-
-    print('r: ', crl.r)
-    print('b0: ', crl.b0)
-    print('b1: ', crl.b1)
-
     # Marca os pontos do dataset
     plt.scatter(ds.x, ds.y)
-
-    # Gera valores de 0 até limite_plot de acordo com a regressão linear
-    x_prev = np.linspace(inicio_plot, limite_plot, num=qtd_pontos_plot)
-    y_prev = [crl.reta_regressao(x) for x in x_prev]
     # Merca os pontos da regressão linear
-    plt.scatter(x_prev, y_prev, alpha=0.2, facecolor='red')
+    plt.plot(ds.x, crl.reta_regressao(ds.x), c=[1, 0, 0, 0.5])
 
     plt.show()
