@@ -11,17 +11,21 @@ from mpl_toolkits.mplot3d import Axes3D
 """
     FURB - Bacharelado em Ciências da Computação
     Inteligência Artificial
-    Trabalho 03 - Fase 02 - Análise de Regressão Linear Multipla
+    Trabalho 03 - Fase 03 - Regressão Polinomial - Overfitting
     Equipe: Adriner Maranho de Andrade, Fábio Luiz Fischer, Felipe Anselmo dos Santos, Jorge Guilherme Kohn
 
-    Semelhante a fase anterior, você deve implementar a função regmultipla que calcula os parâmetros 𝛽 para os dados de entrada y e X. Faça um script chamado rmdemo que faz o seguinte:
-        a) Faça o download dos dados do arquivo data.mat ou data.csv. A primeira coluna é o tamanho da casa, a segunda coluna é o número de quartos, e a terceira coluna é o preço da casa.
-        b) Gere uma matriz X para as variáveis independentes (que são o tamanho da casa e o número de  quartos) e o vetor y da variável dependente (que é o preço).
-        c) Verifique a correlação e a regressão para Tamanho da casa e Preço, e, Número de quartos e Preço e faça o gráfico de dispersão.
-        d) Faça o gráfico de dispersão em 3D com o tamanho da casa, número de quartos, e o preço da casa. Neste caso iremos trabalhar com o espaço 3D (verifique como usar Axes3D).
-        e) Trace a linha da regressão no Gráfico de Dispersão. Você pode girar este gráfico para visualizar melhor os dados.
-        f) Mostre na figura os coeficientes de correlação entre Tamanho da casa e Preço e Número de quartos e Preço.
-        g) Calcule o preço de uma casa que tem tamanho de 1650 e 3 quartos. O resultado deve ser igual a 293081.
+    Faça um script demo_regressaop que faz o seguinte:
+        a) Baixe o arquivo data_preg.mat ou data_preg.svg. A primeira coluna representa os valores de x e a segunda coluna representa os valores de y.
+        b) Faça o Gráfico de dispersão dos dados.
+        c) Use a função polyfit para gerar a linha de regressão para N = 1 e trace-o no gráfico de dispersão na cor vermelha (plot (x, y, 'r')). (observe que nesta função a numeração coeficiente é invertida! β0=βN, β1=βN−1, β2=βN−2 , ...βN=β0)
+        d) Trace a linha de regressão para N = 2 no gráfico na cor verde.
+        e) Trace a linha de regressão para N = 3 no gráfico na cor preta.
+        f) Trace a linha de regressão para N = 8 no gráfico na cor amarela.
+        g) Calcule o Erro Quadrático Médio (EQM) para cada linha de regressão. Qual é o mais preciso?
+        h) Para evitar o overfitting, divida os dados aleatoriamente em Dados de Treinamento e Dados de Teste. Use os primeiros 10% dos dados como conjunto de teste, e o resto como de treinamento.
+        i) Repita os passos de c - f, mas agora use apenas os dados de treinamento para ajustar a linha de regressão.
+        J) Repita o passo g, mas agora utilize somente os dados de Teste para calcular o erro.
+        k) Que método é o mais preciso neste caso?
 """
 
 

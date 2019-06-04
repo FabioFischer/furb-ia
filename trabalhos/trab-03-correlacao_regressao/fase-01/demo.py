@@ -9,7 +9,7 @@ import numpy as np
     FURB - Bacharelado em Ciências da Computação
     Inteligência Artificial
     Trabalho 03 - Fase 01 - Análise de Regressão e Correlação Linear
-
+    Equipe: Adriner Maranho de Andrade, Fábio Luiz Fischer, Felipe Anselmo dos Santos, Jorge Guilherme Kohn
 
     1) Implemente duas funções chamadas correlacao e regressao. Cada uma deve ter dois vetores Nx1 como entrada, onde N é a dimensão do vetor (no caso de x N=11).
     A primeira função deve calcular o coeficiente de correlação r, e a segunda função deve calcular a regressão, isto é, β0 e β1.

@@ -15,11 +15,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rmdemo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rmdemo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-02/rmdemo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="149" column="67" lean-forward="true" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
+            <state relative-caret-position="187">
+              <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="demo_regressaop.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-03/demo_regressaop.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="13" column="62" lean-forward="false" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -30,8 +42,8 @@
       <file leaf-file-name="demo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="82" lean-forward="false" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
+            <state relative-caret-position="119">
+              <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="11" selection-end-column="107" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -90,8 +102,9 @@
         <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-02/__init__.py" />
         <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/CorrelacaoRegressaoLinear.py" />
         <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/DataSet.py" />
-        <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/demo.py" />
         <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-02/rmdemo.py" />
+        <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/demo.py" />
+        <option value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-03/demo_regressaop.py" />
       </list>
     </option>
   </component>
@@ -120,6 +133,20 @@
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ex-01" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trab-03-correlacao_regressao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fase-03" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="ex-01" />
@@ -190,7 +217,7 @@
       <recent name="C:\Users\fabio.fischer\Documents\GitHub Projects\furb-ia\exercicios\ex-02" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.trab-03-fase-02">
+  <component name="RunManager" selected="Python.trab-03-fase-03">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -461,7 +488,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="8">
+    <configuration default="false" name="trab-03-fase-03" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\fabio.fischer\AppData\Local\Programs\Python\Python36\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ex-01" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-03/demo_regressaop.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <list size="9">
       <item index="0" class="java.lang.String" itemvalue="Python.ex-01" />
       <item index="1" class="java.lang.String" itemvalue="Python.ex-02" />
       <item index="2" class="java.lang.String" itemvalue="Python.redes_neurais" />
@@ -470,6 +514,7 @@
       <item index="5" class="java.lang.String" itemvalue="Python.trab-02" />
       <item index="6" class="java.lang.String" itemvalue="Python.trab-03-fase-01" />
       <item index="7" class="java.lang.String" itemvalue="Python.trab-03-fase-02" />
+      <item index="8" class="java.lang.String" itemvalue="Python.trab-03-fase-03" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -489,7 +534,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12664714" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -531,13 +576,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-02-algoritmos-genericos/Cromossomo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-02-algoritmos-genericos/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -851,8 +889,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-01/demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="82" lean-forward="false" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
+        <state relative-caret-position="119">
+          <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="11" selection-end-column="107" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -861,8 +899,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-02/rmdemo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="149" column="67" lean-forward="true" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
+        <state relative-caret-position="187">
+          <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../trabalhos/trab-03-correlacao_regressao/fase-03/demo_regressaop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="62" lean-forward="false" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
