@@ -35,7 +35,6 @@ class DataSet:
         self.x = np.array(x)
         self.y = np.array(y)
         self.x_trans = self.x.transpose()
-        self.y_trans = self.y.transpose()
 
     @staticmethod
     def mediana(arr):
