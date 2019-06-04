@@ -61,11 +61,13 @@ class RegressaoPolinomial:
 
     @staticmethod
     def eqm(y1, y2):
-        print(y1)
-        print(y2)
-        print(np.subtract(y1, y2))
-        return 0
-        # return reduce(operator.add, (y1 - y2) ** 2) / len(y2)
+        # Se o tamanho dos vetores de entrada for diferente, deve ser feito um broadcasting do maior para o menor,
+        # de forma que os elementos faltantes no array menor sejam iguais aos do array maior
+        if len(y1) != len(y2):
+            y1y = y1 if len(y1) > len(y2) else [y1[i] if i < len(y1) else 0 for i in range(len(y2))]
+            y2y = y2 if len(y2) > len(y1) else [y2[i] if i < len(y2) else 0 for i in range(len(y1))]
+            return reduce(operator.add, (y1y - y2y) ** 2) / len(y2y)
+        return reduce(operator.add, (y1 - y2) ** 2) / len(y2)
 
 # Realiza leitura do arquivo e parsing dos valores para float
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "data_preg.csv")) as file:
