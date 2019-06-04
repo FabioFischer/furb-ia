@@ -34,6 +34,7 @@ class DataSet:
         self.x = np.array(x)
         self.y = np.array(y)
         self.x_trans = self.x.transpose()
+        self.y_trans = self.y.transpose()
 
     @staticmethod
     def mediana(arr):
@@ -48,17 +49,18 @@ class RegressaoLinearMultipla:
     def regmultipla(self):
         # 𝛽 = (Xt X)-1 Xty
         transp_x = self.dataset.x.transpose()
-        return np.linalg.inv(transp_x.dot(self.dataset.x)).dot(transp_x).dot(self.dataset.y)
+        return np.linalg.inv(transp_x.dot(self.dataset.x)).dot(transp_x.dot(self.dataset.y))
 
     def correlacao(self, dimensao):
         # Calcula mediana dos vetores
-        x = self.dataset.x[:, dimensao]
+        x = self.dataset.x[:, dimensao + 1]
         med_x = DataSet.mediana(x)
         med_y = DataSet.mediana(self.dataset.y)
         # Σ(x−x̄)(y−ȳ)
         dividend = 0
         for i in range(len(x)):
             dividend += (x[i] - med_x) * (self.dataset.y[i] - med_y)
+
         # Σ(ds−ds̄)²
         def soma_linear(dataset, mediana):
             sum = 0
@@ -71,7 +73,7 @@ class RegressaoLinearMultipla:
 
     def regressao(self, dimensao):
         # Calcula mediana dos vetores
-        x = self.dataset.x[:, dimensao]
+        x = self.dataset.x[:, dimensao + 1]
         med_x = DataSet.mediana(x)
         med_y = DataSet.mediana(self.dataset.y)
         # Σ(x−x̄)(y−ȳ)
@@ -88,50 +90,52 @@ class RegressaoLinearMultipla:
         return med_y - (b1 * med_x), b1
 
     def reta_regressao(self, b0, b1, dimensao):
-        x = self.dataset.x[:, dimensao]
+        x = self.dataset.x[:, dimensao + 1]
         # 𝑦̂=𝛽0+𝛽1x
         return b0 + (b1 * x)
 
     def reta_regressao_multipla(self, b, x=None):
         # 𝑦̂= X*𝛽
         if x is None:
-            return np.array(self.dataset.x).dot(b)
+            return self.dataset.x.dot(b)
         return np.array(x).dot(b)
 
 
 # Realiza leitura do arquivo e parsing dos valores para float
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "data.csv")) as file:
     raw_data = csv.reader(file, delimiter=',')
-    data = np.array([[float(elem) for elem in row] for row in raw_data])
+    data = [[float(elem) for elem in row] for row in raw_data]
 
 if data is not None:
-    # Divide as colunas da matriz bruta de forma que as colunas 1 e 2 sejam as variaveis independentes (x)
-    # e a coluna 3 sejam as variaveis dependentes
-    ds = DataSet('Dataset 1', data[:, 0:2], data[:, 2])
+    # Divide as colunas da matriz bruta de forma que as colunas 1 e 2 sejam as variaveis independentes (x) e a coluna 3 sejam as variaveis dependentes
+    # Por convenção, as variáveis independentes devem possuir uma coluna preenchida com o número 1
+    ds = DataSet('Dataset 1', [[1, elem[0], elem[1]] for elem in data], [elem[2] for elem in data])
     rlm = RegressaoLinearMultipla(ds)
 
     # Verificar a correlação e a regressão para Tamanho da casa e Preço e gerar o gráfico de dispersão
+    x0 = ds.x[:, 1]
     x0_corr = rlm.correlacao(0)
     x0_b0, x0_b1 = rlm.regressao(0)
     x0_regressao = rlm.reta_regressao(x0_b0, x0_b1, 0)
     fig = plt.figure('Regressão entre o Tamanho da Casa e o Preço')
     plt.title("r: %s    β0: %s    β1: %s" % (strnum(x0_corr), strnum(x0_b0), strnum(x0_b1)))
     plt.grid(True)
-    plt.scatter(ds.x[:, 0], ds.y)
-    plt.plot(ds.x[:, 0], x0_regressao, c=[1, 0, 0, 0.5])
+    plt.scatter(x0, ds.y)
+    plt.plot(x0, x0_regressao, c=[1, 0, 0, 0.5])
     plt.xlabel('Tamanho da Casa')
     plt.ylabel('Preço')
     plt.show()
 
     # Verificar a correlação e a regressão para Número de Quartos e Preço e gerar o gráfico de dispersão
+    x1 = ds.x[:, 2]
     x1_corr = rlm.correlacao(1)
     x1_b0, x1_b1 = rlm.regressao(1)
     x1_regressao = rlm.reta_regressao(x1_b0, x1_b1, 1)
     fig = plt.figure('Regressão entre a NÃºmero de Quartos e o Preço')
     plt.title("r: %s    β0: %s    β1: %s" % (strnum(x1_corr), strnum(x1_b0), strnum(x1_b1)))
     plt.grid(True)
-    plt.scatter(ds.x[:, 1], ds.y)
-    plt.plot(ds.x[:, 1], x1_regressao, c=[1, 0, 0, 0.5])
+    plt.scatter(x1, ds.y)
+    plt.plot(x1, x1_regressao, c=[1, 0, 0, 0.5])
     plt.xlabel('Número de Quartos')
     plt.ylabel('Preço')
     plt.show()
@@ -142,15 +146,15 @@ if data is not None:
     regressao_multipla = rlm.reta_regressao_multipla(b)
     fig = plt.figure('Linha da regressão no Gráfico de Dispersão 3D')
     ax = fig.gca(projection='3d')
-    ax.scatter(ds.x[:, 0], ds.x[:, 1], ds.y)
-    ax.plot(ds.x[:, 0], ds.x[:, 1], regressao_multipla, c=[1, 0, 0, 0.5])
+    ax.scatter(ds.x[:, 1], ds.x[:, 2], ds.y)
+    ax.plot(ds.x[:, 1], ds.x[:, 2], regressao_multipla, c=[1, 0, 0, 0.5])
     ax.set_xlabel('Tamanho da Casa')
     ax.set_ylabel('Qtde Quartos')
     ax.set_zlabel('Preço')
-    plt.show()
 
     # Calcule o preço de uma casa que tem tamanho de 1650 e 3 quartos. O resultado deve ser igual a 293081
-    print('Preço de uma casa de tamanho 1650 e 3 quartos: ', strnum(rlm.reta_regressao_multipla(b, [1650, 3])))
+    print('Preço de uma casa de tamanho 1650 e 3 quartos: ', strnum(rlm.reta_regressao_multipla(b, [1, 1650, 3])))
+    plt.show()
 
 else:
     print('Erro ao ler arquivo')

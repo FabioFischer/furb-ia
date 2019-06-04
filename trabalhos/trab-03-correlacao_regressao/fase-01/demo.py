@@ -21,7 +21,7 @@ import numpy as np
       d. Mostre os coeficientes de correlação e regressão no Gráfico de Dispersão (utilize a função title)
 
     3) Qual dos datasets não é apropriado para regressão linear?
-    Resposta: TODO
+    Resposta: 2 ou 3 pois os dados não estão dsitribuídos em uma prograssão linear
 """
 
 
