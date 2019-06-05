@@ -23,7 +23,7 @@ from functools import reduce
         e) Trace a linha de regressão para N = 3 no gráfico na cor preta.
         f) Trace a linha de regressão para N = 8 no gráfico na cor amarela.
         g) Calcule o Erro Quadrático Médio (EQM) para cada linha de regressão. Qual é o mais preciso?
-            Resposta: A linha de regressão para N=8 é mais precisa para esse cenário pois obteve o menor erro quadrático médio: 0.05870934697361084
+            Resposta: A linha de regressão para N=8 é mais precisa para esse cenário pois obteve o menor erro quadrático médio: 0.05870934697363511
         h) Para evitar o overfitting, divida os dados aleatoriamente em Dados de Treinamento e Dados de Teste. Use os primeiros 10% dos dados como conjunto de teste, e o resto como de treinamento.
         i) Repita os passos de c - f, mas agora use apenas os dados de treinamento para ajustar a linha de regressão.
         J) Repita o passo g, mas agora utilize somente os dados de Teste para calcular o erro.
@@ -64,10 +64,11 @@ class RegressaoPolinomial:
         # Se o tamanho dos vetores de entrada for diferente, deve ser feito um broadcasting do maior para o menor,
         # de forma que os elementos faltantes no array menor sejam iguais aos do array maior
         if len(y1) != len(y2):
-            y1y = y1 if len(y1) > len(y2) else [y1[i] if i < len(y1) else 0 for i in range(len(y2))]
-            y2y = y2 if len(y2) > len(y1) else [y2[i] if i < len(y2) else 0 for i in range(len(y1))]
+            y1y = deepcopy(y1) if len(y1) > len(y2) else [y1[i] if i < len(y1) else 0 for i in range(len(y2))]
+            y2y = deepcopy(y2) if len(y2) > len(y1) else [y2[i] if i < len(y2) else 0 for i in range(len(y1))]
             return reduce(operator.add, (y1y - y2y) ** 2) / len(y2y)
         return reduce(operator.add, (y1 - y2) ** 2) / len(y2)
+
 
 # Realiza leitura do arquivo e parsing dos valores para float
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "data_preg.csv")) as file:
@@ -87,36 +88,35 @@ if data is not None:
     # Gera a linha de regressão polinomial para N1 em vermelho
     y1 = rp.regressaop(1)
     plt.plot(ds.x, y1, 'r')
-
     # Gera a linha de regressão polinomial para N2 em verde
     y2 = rp.regressaop(2)
     plt.plot(ds.x, y2, 'g')
-
+    print(ds.x)
+    print(y2)
     # Gera a linha de regressão polinomial para N3 em preto
     y3 = rp.regressaop(3)
     plt.plot(ds.x, y3, 'k')
-
     # Gera a linha de regressão polinomial para N8 em amarelo
     y4 = rp.regressaop(8)
     plt.plot(ds.x, y4, 'y')
 
     # Calcula o erro quadratico médio EQM para cada uma das regressões
-    eqm = [[y, RegressaoPolinomial.eqm(y, ds.y)] for y in [y1, y2, y3, y4]]
+    eqm = [[y, RegressaoPolinomial.eqm(y[1], ds.y)] for y in [('N1', y1), ('N2', y2), ('N3', y3), ('N8', y4)]]
     for i in range(len(eqm)):
-        print('EQM da regressão nº%s' % str(i+1), eqm[i][1])
-
+        print('EQM da regressão de %s' % eqm[i][0][0], eqm[i][1])
     plt.show()
 
     # Treinamento para evitar underfitting e overfitting
     # Número de iterações para o treinamento
-    iteracoes = 1
+    iteracoes = 2
     # 'True' para exibir as regressões, 'False' para exeibir apenas o resultado final
     exibeDiagramaTreinamento = True
-
     for i in range(iteracoes):
         # Cria uma cópia dos dados do dataset e randomiza o endereçamento deles na matriz
+        # Ordena os valores para melhor qualidade na exibição no gráfico
         datai = deepcopy(data)
         random.shuffle(datai)
+        datai.sort()
 
         # Seleciona 10% dos dados aleatórios como dados para teste e os outros 90% para dados de treinamento
         index = round((ds.lenght * 10) / 100)
@@ -129,7 +129,7 @@ if data is not None:
             fig = plt.figure('Treinamento de Regressão Polinominial')
             plt.grid(True)
             plt.scatter(ds_teste.x, ds_teste.y)
-            plt.scatter(ds_treinamento.x, ds_treinamento.y, c='r')
+            plt.scatter(ds_treinamento.x, ds_treinamento.y, c='b')
             plt.xlabel('Número de Quartos')
             plt.ylabel('Preço')
 
@@ -145,14 +145,15 @@ if data is not None:
             plt.plot(ds_treinamento.x, y3_tre, 'k')
             plt.plot(ds_treinamento.x, y4_tre, 'y')
 
-        print(RegressaoPolinomial.eqm(y1_tre, y1_tes))
-        print(RegressaoPolinomial.eqm(y2_tre, y2_tes))
-        print(RegressaoPolinomial.eqm(y3_tre, y3_tes))
-        print(RegressaoPolinomial.eqm(y4_tre, y4_tes))
+        # Calcula o erro quadratico médio EQM para cada uma das regressões
+        eqm_tre = [(1, 'N1', y1_tre, y1_tes), (2, 'N2', y2_tre, y2_tes), (3, 'N3', y3_tre, y3_tes), (4, 'N8', y4_tre, y4_tes)]
+        eqm = [[y, RegressaoPolinomial.eqm(y[2], y[3])] for y in eqm_tre]
+
+        for a in eqm:
+            print(a[0][1], a[1])
 
         if exibeDiagramaTreinamento:
             plt.show()
-
 else:
     print('Erro ao ler arquivo')
 
